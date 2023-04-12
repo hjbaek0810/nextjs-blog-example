@@ -3,6 +3,7 @@ import Image from 'next/image';
 import styles from './layout.module.css';
 import utilStyles from '../styles/utils.module.css';
 import Link from 'next/link';
+import Utterances from './Utterances';
 import { useEffect, useState } from 'react';
 
 const name = 'Your Name';
@@ -41,7 +42,7 @@ export default function Layout({ children, home }) {
 	};
 
 	return (
-		<div className="bg-pink-50 dark:bg-black text-gray-800 dark:text-gray-200 h-screen">
+		<div className="bg-pink-50 dark:bg-black text-gray-800 dark:text-gray-200 h-100">
 			<div className={styles.container}>
 				<Head>
 					<link rel="icon" href="/favicon.ico" />
@@ -98,6 +99,7 @@ export default function Layout({ children, home }) {
 				<main>{children}</main>
 				{!home && (
 					<>
+						<Utterances />
 						<div className={styles.backToHome}>
 							<Link href="/">← Back to home</Link>
 						</div>

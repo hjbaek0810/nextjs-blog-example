@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://hj-next-portfolio.vercel.app
+
+# Sitemaps
+Sitemap: https://hj-next-portfolio.vercel.app/sitemap.xml
