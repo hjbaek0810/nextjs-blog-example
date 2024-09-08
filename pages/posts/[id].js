@@ -1,9 +1,9 @@
 import utilStyles from '../../styles/utils.module.css';
-import Layout from '../../components/Layout';
+
 import Head from 'next/head';
 import { getAllPostIds, getPostData } from '../../lib/posts';
-import Date from '../../components/Date';
-import CodeBlock from '../../components/CodeBlock';
+import Date from '@components/Date';
+import CodeBlock from '@components/CodeBlock';
 
 import { MDXRemote } from 'next-mdx-remote';
 
@@ -15,7 +15,8 @@ export async function getStaticPaths() {
 	};
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, preview }) {
+	console.log(`>>>> ${preview}`);
 	const postData = await getPostData(params.id);
 	return {
 		props: {
@@ -36,24 +37,21 @@ const Button = ({ children }) => {
 };
 const components = { Button, CodeBlock };
 
-export default function Post({ postData }) {
+export default function Post({ postData, pathname }) {
 	return (
 		<>
-			<Layout>
-				<Head>
-					<title>{postData.title}</title>
-				</Head>
-				<article>
-					<h1 className={utilStyles.headingXl}>{postData.title}</h1>
-					<div className={utilStyles.lightText}>
-						<Date dateString={postData.date} />
-					</div>
-					{postData.contentHtml && (
-						<div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-					)}
-					{postData.mdxSource && <MDXRemote {...postData.mdxSource} components={components} />}
-				</article>
-			</Layout>
+			<Head>
+				<title>{postData.title}</title>
+			</Head>
+			<article>
+				<h2>pathname: {pathname}</h2>
+				<h1 className={utilStyles.headingXl}>{postData.title}</h1>
+				<div className={utilStyles.lightText}>
+					<Date dateString={postData.date} />
+				</div>
+				{postData.contentHtml && <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />}
+				{postData.mdxSource && <MDXRemote {...postData.mdxSource} components={components} />}
+			</article>
 		</>
 	);
 }

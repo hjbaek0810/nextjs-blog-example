@@ -1,10 +1,10 @@
 import Head from 'next/head';
-import Layout, { siteTitle } from '../components/Layout';
+import { siteTitle } from '@components/Layout';
 import utilStyles from '../styles/utils.module.css';
 import { getSortedPostsData } from '../lib/posts';
 // import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Date from '../components/Date';
+import Date from '@components/Date';
 
 export async function getStaticProps() {
 	const allPostsData = getSortedPostsData();
@@ -39,7 +39,7 @@ export default function Home({ allPostsData }) {
 
 	// console.log(allPostsData, 'asdasd');
 	return (
-		<Layout home>
+		<>
 			<Head>
 				<title>{siteTitle}</title>
 			</Head>
@@ -64,6 +64,6 @@ export default function Home({ allPostsData }) {
 					))}
 				</ul>
 			</section>
-		</Layout>
+		</>
 	);
 }
